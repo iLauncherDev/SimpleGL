@@ -1,0 +1,23 @@
+set(SIMPLEGL_LIB_NAME simplegl_core)
+set(SIMPLEGL_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+set(SIMPLEGL_INCLUDE_PATH "${SIMPLEGL_PATH}/inc")
+
+list(APPEND SIMPLEGL_SOURCE
+    ${SIMPLEGL_PATH}/lib/list.c
+    ${SIMPLEGL_PATH}/lib/s_string.c
+    ${SIMPLEGL_PATH}/lib/status.c
+
+    ${SIMPLEGL_PATH}/compiler/compiler.c
+
+    ${SIMPLEGL_PATH}/main.c
+)
+
+add_library(${SIMPLEGL_LIB_NAME} SHARED ${SIMPLEGL_SOURCE})
+set_target_properties(${SIMPLEGL_LIB_NAME} PROPERTIES
+    CXX_VISIBILITY_PRESET hidden
+    C_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN ON
+)
+
+target_include_directories(${SIMPLEGL_LIB_NAME} PRIVATE ${SIMPLEGL_INCLUDE_PATH})
+target_include_directories(${SIMPLEGL_LIB_NAME} PUBLIC ${SIMPLEGL_SDK_INCLUDE_PATH})
